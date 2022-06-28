@@ -1,0 +1,21 @@
+@startuml
+
+class Main {
+    + main(String[] args)
+}
+
+class Webpage {
+    - String title
+    - String URL
+    - Document document
+
+    + getTitle()
+    + getURL()
+    + getDocument()
+}
+
+Main --> Webpage
+
+hide Main fields
+
+@enduml
