@@ -11,12 +11,13 @@ class Crawler {
 }
 
 class Webpage {
-    - String title
     - String URL
     - Document document
 
+    + Webpage(String URL)
     + getTitle()
     + getURL()
+    + setDocument()
     + getDocument()
 }
 
