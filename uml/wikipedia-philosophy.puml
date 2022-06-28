@@ -4,6 +4,12 @@ class Main {
     + main(String[] args)
 }
 
+class Crawler {
+    - Webpage startingWebpage
+
+    + Crawler(Webpage webpage)
+}
+
 class Webpage {
     - String title
     - String URL
@@ -14,7 +20,8 @@ class Webpage {
     + getDocument()
 }
 
-Main --> Webpage
+Main --> Crawler
+Crawler <-- Webpage
 
 hide Main fields
 
