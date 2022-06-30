@@ -1,3 +1,4 @@
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -12,7 +13,13 @@ public class Crawler {
         Elements bodyContentParagraphTags = startingWebpage.getDocument().getElementsByClass("mw-parser-output").select("p");
 
         for (Element currentParagraph : bodyContentParagraphTags) {
-            System.out.println(getParagraphWithoutParentheses(currentParagraph));
+            Elements links = Jsoup.parseBodyFragment(getParagraphWithoutParentheses(currentParagraph)).select("a");
+
+            for (Element currentLink : links) {
+                if (!linkIsAReference(currentLink)) {
+                    return currentLink.attr("href");
+                }
+            }
         }
         return "";
     }
@@ -36,5 +43,9 @@ public class Crawler {
             }
         }
         return newParagraph.toString();
+    }
+
+    private boolean linkIsAReference(Element anchor) {
+        return anchor.toString().contains("#cite_note");
     }
 }

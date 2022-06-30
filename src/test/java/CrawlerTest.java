@@ -13,7 +13,7 @@ class CrawlerTest {
         Crawler webCrawler = new Crawler(webpage);
 
         String expected = "https://en.wikipedia.org/wiki/Multilingualism";
-        String actual = webCrawler.getFirstValidLink();
+        String actual = "https://en.wikipedia.org" + webCrawler.getFirstValidLink();
 
         assertEquals(expected, actual);
     }
