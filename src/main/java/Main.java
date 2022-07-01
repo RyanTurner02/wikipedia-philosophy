@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        String URL = "https://en.wikipedia.org/wiki/Wikipedia";
+        String URL = args[0];
         Webpage initialWebpage = new Webpage(URL);
 
         Crawler webCrawler = new Crawler(initialWebpage);
