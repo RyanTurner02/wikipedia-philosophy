@@ -35,17 +35,28 @@ public class Crawler {
         int length = oldParagraph.length();
         int counter = 0;
 
-        for (int i = 0; i < length; i++) {
-            char currentCharacter = oldParagraph.charAt(i);
+        boolean isInAnchor = false;
 
-            if (currentCharacter == '(') {
+        int index = 0;
+        for (; index < length - 1; index++) {
+            char currentCharacter = oldParagraph.charAt(index);
+            char nextCharacter = oldParagraph.charAt(index + 1);
+
+            if (currentCharacter == '<' && nextCharacter == 'a') {
+                isInAnchor = true;
+            } else if (currentCharacter == 'a' && nextCharacter == '>') {
+                isInAnchor = false;
+            }
+
+            if (currentCharacter == '(' && !isInAnchor) {
                 counter++;
-            } else if (currentCharacter == ')') {
+            } else if (currentCharacter == ')' && !isInAnchor) {
                 counter--;
             } else if (counter == 0) {
                 newParagraph.append(currentCharacter);
             }
         }
+        newParagraph.append(oldParagraph.charAt(index)); // get the last character
         return newParagraph.toString();
     }
 
