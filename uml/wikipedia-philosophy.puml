@@ -1,0 +1,33 @@
+@startuml
+
+class Main {
+    + main(String[] args)
+}
+
+class Crawler {
+    - Webpage initialWebpage
+
+    + Crawler(Webpage webpage)
+    + getFirstHeading()
+    + getFirstValidLink()
+    + getParagraphWithoutParentheses(Element paragraph)
+    + linkIsAReference(Element anchor)
+}
+
+class Webpage {
+    - String URL
+    - Document document
+
+    + Webpage(String URL)
+    + getTitle()
+    + getURL()
+    + setDocument()
+    + getDocument()
+}
+
+Main --> Crawler
+Crawler <-- Webpage
+
+hide Main fields
+
+@enduml
