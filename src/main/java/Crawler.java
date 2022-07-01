@@ -61,6 +61,7 @@ public class Crawler {
     }
 
     private boolean linkIsAReference(Element anchor) {
-        return anchor.toString().contains("#cite_note");
+        String anchorStr = anchor.toString();
+        return anchorStr.contains("#cite_note") || anchorStr.contains("#cnote");
     }
 }
