@@ -1,12 +1,17 @@
 public class Main {
     public static void main(String[] args) {
         String URL = "https://en.wikipedia.org/wiki/Wikipedia";
-        Webpage startingWebpage = new Webpage(URL);
+        Webpage initialWebpage = new Webpage(URL);
 
-//        System.out.println(startingWebpage.getDocument());
-//        System.out.println(startingWebpage.getTitle());
-//        System.out.println(startingWebpage.getURL());
+        Crawler webCrawler = new Crawler(initialWebpage);
+        String heading = "";
 
-        Crawler crawler = new Crawler(startingWebpage);
+        while (!heading.equals("Philosophy")) {
+            String nextLink = "https://en.wikipedia.org" + webCrawler.getFirstValidLink();
+            Webpage nextWebpage = new Webpage(nextLink);
+            webCrawler = new Crawler(nextWebpage);
+            heading = webCrawler.getFirstHeading();
+            System.out.println(heading);
+        }
     }
 }

@@ -3,14 +3,18 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Crawler {
-    Webpage startingWebpage;
+    Webpage initialWebpage;
 
     public Crawler(Webpage webpage) {
-        this.startingWebpage = webpage;
+        this.initialWebpage = webpage;
+    }
+
+    public String getFirstHeading() {
+        return initialWebpage.getDocument().getElementsByClass("firstHeading mw-first-heading").text();
     }
 
     public String getFirstValidLink() {
-        Elements bodyContentParagraphTags = startingWebpage.getDocument().getElementsByClass("mw-parser-output").select("p");
+        Elements bodyContentParagraphTags = initialWebpage.getDocument().getElementsByClass("mw-parser-output").select("p");
 
         for (Element currentParagraph : bodyContentParagraphTags) {
             Elements links = Jsoup.parseBodyFragment(getParagraphWithoutParentheses(currentParagraph)).select("a");
