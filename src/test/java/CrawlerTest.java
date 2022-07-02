@@ -31,4 +31,32 @@ class CrawlerTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("First Link is Valid with Lettered Reference as the First Link")
+    void firstLinkIsValid3() {
+        String testingURL = "https://en.wikipedia.org/wiki/Landscape";
+
+        Webpage webpage = new Webpage(testingURL);
+        Crawler webCrawler = new Crawler(webpage);
+
+        String expected = "https://en.wikipedia.org/wiki/Terrestrial_ecoregion";
+        String actual = "https://en.wikipedia.org" + webCrawler.getFirstValidLink();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("First Link is Valid with Picture as the First Link")
+    void firstLinkIsValid4() {
+        String testingURL = "https://en.wikipedia.org/wiki/President_of_the_United_States";
+
+        Webpage webpage = new Webpage(testingURL);
+        Crawler webCrawler = new Crawler(webpage);
+
+        String expected = "https://en.wikipedia.org/wiki/Head_of_state";
+        String actual = "https://en.wikipedia.org" + webCrawler.getFirstValidLink();
+
+        assertEquals(expected, actual);
+    }
 }

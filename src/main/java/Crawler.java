@@ -20,7 +20,7 @@ public class Crawler {
             Elements links = Jsoup.parseBodyFragment(getParagraphWithoutParentheses(currentParagraph)).select("a");
 
             for (Element currentLink : links) {
-                if (!linkIsAReference(currentLink)) {
+                if (!linkIsAFile(currentLink) && !linkIsAReference(currentLink)) {
                     return currentLink.attr("href");
                 }
             }
@@ -63,5 +63,9 @@ public class Crawler {
     private boolean linkIsAReference(Element anchor) {
         String anchorStr = anchor.toString();
         return anchorStr.contains("#cite_note") || anchorStr.contains("#cnote");
+    }
+
+    private boolean linkIsAFile(Element anchor) {
+        return anchor.toString().contains("/wiki/File:");
     }
 }
